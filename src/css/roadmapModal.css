@@ -1,0 +1,263 @@
+.rm-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: rgba(10, 20, 40, 0.55);
+  overflow-y: auto;
+}
+
+.rm {
+  --rm-ink: #1f2a44;
+  --rm-slate: #3c4a6e;
+  --rm-step: #4b5578;
+
+  position: relative;
+  flex: none;
+  width: 310px;
+  height: 812px;
+  max-height: calc(100vh - 32px);
+  overflow: hidden;
+  border-radius: 14px;
+  background: linear-gradient(180deg, #a9c9f2 0%, #cfe0f7 55%, #dfe8f7 100%);
+  font-family: "Heebo", "Assistant", "Arial Hebrew", Arial, sans-serif;
+  box-shadow: 0 8px 28px rgba(20, 40, 90, 0.35);
+}
+
+.rm-close {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  z-index: 3;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--rm-slate);
+  cursor: pointer;
+}
+
+.rm-close:focus-visible {
+  outline: 2px solid var(--rm-slate);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+.rm-steps {
+  position: absolute;
+  inset: 0;
+}
+
+.rm-step {
+  fill: var(--rm-step);
+  opacity: 0.85;
+  transition: fill 0.4s ease, opacity 0.4s ease;
+}
+
+.rm-step--done {
+  fill: #fff;
+  opacity: 1;
+}
+
+.rm-soldiers {
+  position: absolute;
+  top: 2vh;
+  /* Positioned near the very top of the map */
+  left: 25vw;
+  /* Aligned with the starting pathway coordinates */
+  width: 50vw;
+  /* Adjust size to fit the map proportions */
+  height: auto;
+  transform: rotate(2deg);
+  /* Match the angle of the top trail */
+  z-index: 2;
+}
+
+.rm-clinic {
+  position: absolute;
+  bottom: 6px;
+  left: 78px;
+}
+
+.rm-station {
+  position: absolute;
+  width: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  color: var(--rm-ink);
+  transform: translateX(-50%);
+}
+
+.rm-plus {
+  fill: var(--rm-slate);
+}
+
+.rm-label {
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.25;
+  text-align: center;
+}
+
+/* progress states */
+.rm-station--upcoming {
+  opacity: 0.55;
+}
+
+.rm-station--current .rm-plus {
+  fill: #fff;
+  stroke: var(--rm-slate);
+  stroke-width: 1.5;
+}
+
+.rm-station--current .rm-label {
+  font-weight: 700;
+}
+
+.rm-walker {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  pointer-events: none;
+  transition: transform 0.8s ease-in-out;
+}
+
+/* centers the image on the footprint, with its bottom edge at the feet */
+.rm-walker__anchor {
+  transform: translate(-50%, -100%);
+}
+
+.rm-soldiers {
+  display: block;
+  position: absolute;
+  width: 50vw;
+  /* Adjust size to fit the map proportions */
+  transform: rotate(2deg);
+  /* Match the angle of the top trail */
+  z-index: 2;
+  height: auto;
+  animation: rm-bob 0.5s ease-in-out infinite alternate;
+}
+
+@keyframes rm-bob {
+  from {
+    transform: translateY(0);
+  }
+
+  to {
+    transform: translateY(-2px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rm-walker {
+    transition: none;
+  }
+
+  .rm-soldiers {
+    animation: none;
+  }
+}
+
+.rm-walker {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  pointer-events: none;
+  transition: transform 0.8s ease-in-out;
+}
+
+/* centers the image on the footprint, with its bottom edge at the feet */
+.rm-walker__anchor {
+  transform: translate(-50%, -100%) rotateY(0deg);
+  transition: transform 0.5s ease-in-out;
+}
+
+.rm-walker__anchor--flip {
+  transform: translate(-50%, -100%) rotateY(180deg);
+}
+.rm-soldiers {
+  position: static;   /* cancels the old absolute positioning */
+  top: auto;
+  right: auto;
+  bottom: auto;
+  left: auto;
+  display: block;
+  width: 180px;        /* adjust to the size you want */
+  height: auto;
+  animation: rm-bob 0.5s ease-in-out infinite alternate;
+}
+
+@keyframes rm-bob {
+  from { transform: translateY(0); }
+  to   { transform: translateY(-2px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rm-walker { transition: none; }
+  .rm-soldiers { animation: none; }
+}
+
+.page-stack {
+  position: relative;
+  width: 100%;
+  perspective: 1400px;
+}
+
+.page-layer {
+  width: 100%;
+}
+
+.page-layer--over {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  transform-origin: top center;   /* hinge at the spiral binding */
+  backface-visibility: hidden;
+}
+
+.page-layer--up {
+  animation: page-flip-up 0.65s cubic-bezier(0.55, 0.1, 0.75, 0.4) forwards;
+}
+
+.page-layer--down {
+  animation: page-flip-down 0.65s cubic-bezier(0.25, 0.6, 0.45, 0.9) both;
+}
+
+@keyframes page-flip-up {
+  from { transform: rotateX(0deg);   filter: brightness(1); }
+  to   { transform: rotateX(100deg); filter: brightness(0.8); }
+}
+
+@keyframes page-flip-down {
+  from { transform: rotateX(100deg); filter: brightness(0.8); }
+  to   { transform: rotateX(0deg);   filter: brightness(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-layer--up,
+  .page-layer--down { animation-duration: 0.01ms; }
+}
+
+.rm-fit {
+  position: relative;
+  flex: none;
+}
+
+.rm {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform-origin: top left;
+  max-height: none;   /* the old max-height would crop the scaled canvas */
+}

@@ -1,0 +1,77 @@
+@font-face {
+    font-family: 'noto-sans';
+    src: url('/src/assets/fonts/NotoSansHebrew-VariableFont_wdth\,wght.ttf')
+}
+
+html, /* Removed the dot! This now targets the actual <html> tag */
+body {
+    width: 100vw;
+    height: 100vh;
+    margin: 0;   /* Recommended to remove default browser margins */
+    padding: 0;
+}
+
+body {
+    /* Use a relative path from your CSS file's location */
+    background-image: url("../assets/images/background.jpg"); 
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.page {
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:row;
+}
+
+.bahad10 {
+    width: 12vw;
+}
+
+.corps {
+    width: 18vw;
+}
+
+.logo {
+    margin: 5px;
+    height: 7vh;
+}
+
+.logo-row {
+    display:flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+.bahad10_slogan {
+    width: 40vw;
+    position:fixed;
+    bottom:0;
+    right: 0;
+}
+
+.button {
+    position: absolute;
+    top:  50%;
+}
+
+.button:active {
+    scale: 0.95;
+    transition: scale 0.05s ease-in, box-shadow 0.05s ease-in;
+}
+
+.title {
+    font-family: 'noto-sans';
+    font-size: 3.5rem;
+    position: absolute;
+    direction: rtl;
+    color: #122851;
+    text-align: center;
+    top: 20%;
+    font-weight:bold;
+    line-height: 60px;
+}
+

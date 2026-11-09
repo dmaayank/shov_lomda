@@ -1,0 +1,99 @@
+/* Header.css */
+.top-banner {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+    background-color: transparent;
+    direction: rtl;
+}
+
+/* Container for the two logos on the left */
+.header-logos {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.top-logo {
+    width: 36px;
+    height: auto;
+    object-fit: contain;
+}
+
+/* Container for the text titles on the right */
+.header-titles {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: right;
+    direction: rtl;
+}
+
+.system-title {
+    font-size: 1rem;
+    font-weight: 800;
+    color: #0b1c3d;
+    /* Deep navy text color matching your theme */
+    margin: 0;
+}
+
+.system-subtitle {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: #334e68;
+    margin: 2px 0 0 0;
+}
+
+.top-logo {
+    height: 7vh;
+}
+
+.bahad10 {
+    width: 8vw;
+}
+
+.corps {
+    width: 12vw;
+}
+
+/* Right section containing titles and map icon */
+.header-right-section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: right;
+  transition: opacity 0.2s ease;
+}
+
+.header-right-section:hover {
+  opacity: 0.85;
+}
+
+.title-with-icon {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.system-title {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #0b1c3d; /* Deep navy color */
+  margin: 0;
+  letter-spacing: -0.5px;
+}
+
+.map-icon-wrapper {
+  color: #0b1c3d;
+  display: flex;
+  align-items: center;
+}
+
+.system-subtitle {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #102a43;
+  margin-top: 2px;
+}

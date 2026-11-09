@@ -1,0 +1,423 @@
+@font-face {
+    font-family: 'noto-sans';
+    src: url('/src/assets/fonts/NotoSansHebrew-VariableFont_wdth\,wght.ttf')
+}
+
+@font-face {
+    font-family: 'noto-sans';
+    src: url('/src/assets/fonts/NotoSansHebrew-VariableFont_wdth\,wght.ttf')
+}
+
+@font-face {
+    font-family: 'playpen';
+    src: url('/src/assets/fonts/PlaypenSansHebrew-VariableFont_wght.ttf')
+}
+
+
+
+html,
+/* Removed the dot! This now targets the actual <html> tag */
+body {
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    /* Recommended to remove default browser margins */
+    padding: 0;
+}
+
+body {
+    /* Use a relative path from your CSS file's location */
+    background-image: url("../assets/images/background.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+
+/* Container layout filling the screen with the desert background */
+.carousel-container {
+    position: relative;
+    width: 100%;
+    max-width: 480px;
+    /* Mobile-first container constraint */
+    height: 100vh;
+    margin: 0 auto;
+    background-image: url('../assets/images/desert-bg.png');
+    /* Replace with your actual desert background path */
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 4px 16px;
+    box-sizing: border-box;
+    font-family: 'noto-sans';
+    overflow: hidden;
+}
+
+/* Header section with logos & title */
+.header {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.header h1 {
+    font-size: 1.8rem;
+    position: relative;
+    top: 10vh;
+    font-weight: 800;
+    color: #0b1c3d;
+    /* Dark navy color matching the design */
+    margin: 0;
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.6);
+}
+
+.header h2 {
+    font-size: 1rem;
+    color: #334e68;
+    margin: 4px 0 0 0;
+}
+
+/* Main content area containing the notebook card */
+.content-area {
+  display: flex;
+  flex-direction: column;   /* heading on top, card below */
+  align-items: center;      /* center both horizontally */
+  justify-content: center;  /* center the group vertically */
+}
+
+.step-heading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  margin: 0 0 20px;
+  text-align: center;
+}
+
+.step-title {
+  margin: 0;
+  font-size: 30px;
+  font-weight: 800;
+  line-height: 1.15;
+  color: #102a43;
+  top: 15%;
+  position:relative;
+}
+
+.step-subtitle {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 700;
+  color: #102a43;
+}
+
+/* The Notebook Card Design with ring bindings */
+.notebook-card {
+    background: #fbf9f4;
+    width: 80%;
+    max-width: 360px;
+    min-height: 380px;
+    border-radius: 12px;
+    padding: 30px 20px 20px 20px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    position: relative;
+    text-align: right;
+    border: 1px solid #e0dcd0;
+    background-image: repeating-linear-gradient(transparent,
+            transparent 28px,
+            #e8e2d0 28px,
+            #e8e2d0 29px);
+    /* Creates notebook lines */
+    background-position: 0 40px;
+    font-family: 'playpen';
+}
+
+/* Ring bindings across the top of the notebook card */
+.notebook-card::before {
+    content: "";
+    position: absolute;
+    top: -8px;
+    left: 20px;
+    right: 20px;
+    height: 12px;
+    /* Simulating spiral/rings row */
+    background: radial-gradient(circle, #2b3a4a 4px, transparent 5px);
+    background-size: 24px 12px;
+    background-repeat: repeat-x;
+}
+
+.notebook-card h3 {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #102a43;
+    margin-bottom: 12px;
+    margin-top: 0;
+}
+
+.notebook-card p {
+    font-size: 1rem;
+    color: #243b53;
+    line-height: 29px;
+    /* Matches the background lines height */
+    margin: 0;
+}
+
+.notebook-card--with-icon {
+  position: relative;
+  /* no padding change, so the paper keeps its size */
+}
+
+.notebook-card--with-icon .app-icon-badge {
+  position: absolute;
+  left: 50%;
+  bottom: 24px;
+  transform: translateX(-50%);
+  margin: 0;
+}
+
+/* Footer layout for navigation controls */
+.footer-controls {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 10px;
+}
+
+/* Pagination indicator dots */
+.dots-container {
+    flex-direction: row-reverse;
+    /* Forces the first dot to start on the left in RTL mode */
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.6);
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.dot.active {
+    background-color: #243b53;
+    /* Active dark dot */
+    transform: scale(1.2);
+}
+
+/* Action button row */
+.button-group {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+}
+
+/* Primary "המשך" / "סיום" button */
+.btn-primary {
+    background-color: #627d98;
+    /* Muted blue-grey tone */
+    color: #ffffff;
+    font-size: 1.1rem;
+    font-weight: bold;
+    padding: 12px 0;
+    width: 70%;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-primary:hover {
+    background-color: #486581;
+}
+
+/* Secondary "חזור" button */
+.btn-secondary {
+    background-color: rgba(255, 255, 255, 0.8);
+    color: #334e68;
+    font-size: 1.1rem;
+    font-weight: bold;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+}
+
+/* Layout 1: Icon Card Container */
+.icon-card-layout {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+}
+
+.app-icon-badge {
+  background-color: #0066ff; /* Bright blue background matching the design */
+  width: 120px;
+  height: 120px;
+  border-radius: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  border: 3px solid #ffffff;
+}
+
+.app-icon-badge img {
+  width: 80px;
+  height: auto;
+}
+
+/* Layout 2: Flow Steps Container */
+.flow-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 90%;
+  max-width: 360px;
+  gap: 8px;
+}
+
+.flow-box {
+  background-color: rgba(255, 255, 255, 0.92);
+  width: 100%;
+  padding: 16px 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border: 1px solid #ccd8e8;
+  text-align: right;
+}
+
+.flow-box p {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #102a43;
+}
+
+.flow-arrow {
+  font-size: 2.5rem;
+  color: #102a43;
+  margin: 2px 0;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+}
+
+html, body, #root {
+  height: 100%;
+  margin: 0;
+}
+
+/* page fills the phone; header, content and footer stack in a column */
+.carousel-container {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;      /* accounts for mobile browser bars */
+  overflow-x: hidden;
+}
+
+/* content takes the leftover space and scrolls only if it really must */
+.content-area {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 100%;
+  padding: clamp(8px, 2dvh, 20px) clamp(12px, 5vw, 24px);
+  overflow-y: auto;
+}
+
+.step-heading {
+  margin-bottom: clamp(8px, 2.5dvh, 20px);
+}
+
+.step-title {
+  font-size: clamp(22px, 7.5vw, 32px);
+}
+
+.step-subtitle {
+  font-size: clamp(14px, 4.5vw, 18px);
+}
+
+.page-stack {
+  width: 100%;
+  max-width: 380px;
+  margin-inline: auto;
+}
+
+.notebook-card {
+  box-sizing: border-box;
+  width: 100%;
+  margin: 0;
+  min-height: clamp(240px, 40dvh, 420px);
+}
+
+.notebook-card h3 {
+  font-size: clamp(16px, 5vw, 20px);
+}
+
+.notebook-card p {
+  font-size: clamp(13px, 3.9vw, 16px);
+}
+
+.notebook-card--with-icon .app-icon-badge {
+  width: clamp(72px, 24vw, 100px);
+  height: clamp(72px, 24vw, 100px);
+}
+
+.flow-container {
+  width: 100%;
+}
+
+.flow-box {
+  box-sizing: border-box;
+  width: 100%;
+  font-size: clamp(13px, 4vw, 16px);
+}
+
+/* footer stays reachable above the home indicator / gesture bar */
+.footer-controls {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 8px clamp(12px, 5vw, 24px) max(14px, env(safe-area-inset-bottom));
+}
+
+.button-group {
+  display: flex;
+  gap: clamp(8px, 3vw, 16px);
+  width: 100%;
+  max-width: 380px;
+  margin-inline: auto;
+}
+
+.button-group > * {
+  flex: 1;
+}
+
+/* short phones (small SE-type screens, landscape) */
+@media (max-height: 640px) {
+  .notebook-card {
+    min-height: 0;
+  }
+
+  .step-title {
+    font-size: clamp(20px, 6vw, 26px);
+  }
+}
