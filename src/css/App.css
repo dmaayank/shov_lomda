@@ -1,0 +1,19 @@
+@font-face {
+    font-family: 'adi';
+    src: url('/src/assets/fonts/OH\ AdiLeon-Regular.otf')
+}
+
+@font-face {
+    font-family: 'ibm-regular';
+    src: url('/src/assets/fonts/IBMPlexSansHebrew-Regular.ttf')
+}
+
+@font-face {
+    font-family: 'ibm-bold';
+    src: url('/src/assets/fonts/IBMPlexSansHebrew-Bold.ttf')
+}
+
+@font-face {
+    font-family: 'playpen';
+    src: url('/src/assets/fonts/PlaypenSansHebrew-VariableFont_wght.ttf')
+}
