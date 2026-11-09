@@ -1,74 +1,67 @@
+/* ==========================================================================
+   1. FONT FACES & RESET
+   ========================================================================== */
 @font-face {
     font-family: 'noto-sans';
-    src: url('/src/assets/fonts/NotoSansHebrew-VariableFont_wdth\,wght.ttf')
-}
-
-@font-face {
-    font-family: 'noto-sans';
-    src: url('/src/assets/fonts/NotoSansHebrew-VariableFont_wdth\,wght.ttf')
+    src: url('/src/assets/fonts/NotoSansHebrew-VariableFont_wdth,wght.ttf') format('truetype');
+    font-weight: 100 900;
 }
 
 @font-face {
     font-family: 'playpen';
-    src: url('/src/assets/fonts/PlaypenSansHebrew-VariableFont_wght.ttf')
+    src: url('/src/assets/fonts/PlaypenSansHebrew-VariableFont_wght.ttf') format('truetype');
+    font-weight: 100 900;
 }
 
-
-
-html,
-/* Removed the dot! This now targets the actual <html> tag */
-body {
-    width: 100vw;
-    height: 100vh;
+html, body, #root {
+    width: 100%;
+    height: 100%;
     margin: 0;
-    /* Recommended to remove default browser margins */
     padding: 0;
+    overflow-x: hidden;
 }
 
 body {
-    /* Use a relative path from your CSS file's location */
     background-image: url("../assets/images/background.jpg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    font-family: 'noto-sans', sans-serif;
 }
 
-
-/* Container layout filling the screen with the desert background */
+/* ==========================================================================
+   2. MAIN CONTAINER & LAYOUT
+   ========================================================================== */
 .carousel-container {
     position: relative;
     width: 100%;
     max-width: 480px;
-    /* Mobile-first container constraint */
-    height: 100vh;
+    min-height: 100vh;
+    min-height: 100dvh; /* Mobile viewport height fix */
     margin: 0 auto;
     background-image: url('../assets/images/desert-bg.png');
-    /* Replace with your actual desert background path */
     background-size: cover;
     background-position: center;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    padding: 4px 16px;
+    padding: 0 16px;
     box-sizing: border-box;
-    font-family: 'noto-sans';
     overflow: hidden;
 }
 
-/* Header section with logos & title */
+/* Header section */
 .header {
     text-align: center;
-    margin-top: 10px;
+    margin-top: 16px;
+    width: 100%;
 }
 
 .header h1 {
-    font-size: 1.8rem;
-    position: relative;
-    top: 10vh;
+    font-size: clamp(1.4rem, 5vw, 1.8rem);
     font-weight: 800;
     color: #0b1c3d;
-    /* Dark navy color matching the design */
     margin: 0;
     text-shadow: 0 1px 2px rgba(255, 255, 255, 0.6);
 }
@@ -79,62 +72,79 @@ body {
     margin: 4px 0 0 0;
 }
 
-/* Main content area containing the notebook card */
+/* Main Content Area */
 .content-area {
-  display: flex;
-  flex-direction: column;   /* heading on top, card below */
-  align-items: center;      /* center both horizontally */
-  justify-content: center;  /* center the group vertically */
+    flex: 1 1 auto;
+    min-height: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    padding: clamp(8px, 2dvh, 16px) 0;
+    overflow-y: auto;
 }
 
+/* Step Headings (Fixed position relative bug) */
 .step-heading {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2px;
-  margin: 0 0 20px;
-  text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    margin-bottom: clamp(10px, 2.5dvh, 20px);
+    text-align: center;
+    width: 100%;
 }
 
 .step-title {
-  margin: 0;
-  font-size: 30px;
-  font-weight: 800;
-  line-height: 1.15;
-  color: #102a43;
-  top: 15%;
-  position:relative;
+    margin: 0;
+    font-size: clamp(22px, 7.5vw, 32px);
+    font-weight: 800;
+    line-height: 1.15;
+    color: #102a43;
+    /* REMOVED: position: relative & top: 15% which caused the overlap */
 }
 
 .step-subtitle {
-  margin: 0;
-  font-size: 17px;
-  font-weight: 700;
-  color: #102a43;
+    margin: 0;
+    font-size: clamp(14px, 4.5vw, 18px);
+    font-weight: 700;
+    color: #102a43;
 }
 
-/* The Notebook Card Design with ring bindings */
+/* ==========================================================================
+   3. NOTEBOOK CARD DESIGN
+   ========================================================================== */
+.page-stack {
+    width: 100%;
+    max-width: 360px;
+    margin-inline: auto;
+}
+
 .notebook-card {
     background: #fbf9f4;
-    width: 80%;
+    width: 100%;
     max-width: 360px;
-    min-height: 380px;
+    box-sizing: border-box;
+    min-height: clamp(260px, 38dvh, 400px);
     border-radius: 12px;
-    padding: 30px 20px 20px 20px;
+    padding: 28px 20px 20px 20px;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
     position: relative;
     text-align: right;
     border: 1px solid #e0dcd0;
-    background-image: repeating-linear-gradient(transparent,
-            transparent 28px,
-            #e8e2d0 28px,
-            #e8e2d0 29px);
-    /* Creates notebook lines */
+    background-image: repeating-linear-gradient(
+        transparent,
+        transparent 28px,
+        #e8e2d0 28px,
+        #e8e2d0 29px
+    );
     background-position: 0 40px;
-    font-family: 'playpen';
+    font-family: 'playpen', cursive, sans-serif;
 }
 
-/* Ring bindings across the top of the notebook card */
+/* Ring bindings across top */
 .notebook-card::before {
     content: "";
     position: absolute;
@@ -142,14 +152,13 @@ body {
     left: 20px;
     right: 20px;
     height: 12px;
-    /* Simulating spiral/rings row */
     background: radial-gradient(circle, #2b3a4a 4px, transparent 5px);
     background-size: 24px 12px;
     background-repeat: repeat-x;
 }
 
 .notebook-card h3 {
-    font-size: 1.25rem;
+    font-size: clamp(16px, 5vw, 20px);
     font-weight: bold;
     color: #102a43;
     margin-bottom: 12px;
@@ -157,40 +166,101 @@ body {
 }
 
 .notebook-card p {
-    font-size: 1rem;
+    font-size: clamp(13px, 3.9vw, 16px);
     color: #243b53;
     line-height: 29px;
-    /* Matches the background lines height */
     margin: 0;
 }
 
 .notebook-card--with-icon {
-  position: relative;
-  /* no padding change, so the paper keeps its size */
+    position: relative;
 }
 
 .notebook-card--with-icon .app-icon-badge {
-  position: absolute;
-  left: 50%;
-  bottom: 24px;
-  transform: translateX(-50%);
-  margin: 0;
+    position: absolute;
+    left: 50%;
+    bottom: 24px;
+    transform: translateX(-50%);
+    margin: 0;
+    width: clamp(72px, 24vw, 90px);
+    height: clamp(72px, 24vw, 90px);
 }
 
-/* Footer layout for navigation controls */
-.footer-controls {
-    width: 100%;
+/* Layout variants */
+.icon-card-layout {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 16px;
-    margin-bottom: 10px;
+    width: 100%;
 }
 
-/* Pagination indicator dots */
+.app-icon-badge {
+    background-color: #0066ff;
+    width: 110px;
+    height: 110px;
+    border-radius: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+    border: 3px solid #ffffff;
+}
+
+.app-icon-badge img {
+    width: 70%;
+    height: auto;
+}
+
+.flow-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 360px;
+    gap: 8px;
+}
+
+.flow-box {
+    box-sizing: border-box;
+    background-color: rgba(255, 255, 255, 0.92);
+    width: 100%;
+    padding: 14px 18px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    border: 1px solid #ccd8e8;
+    text-align: right;
+    font-size: clamp(13px, 4vw, 16px);
+}
+
+.flow-box p {
+    margin: 0;
+    font-weight: 600;
+    color: #102a43;
+}
+
+.flow-arrow {
+    font-size: 2rem;
+    color: #102a43;
+    margin: 0;
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+}
+
+/* ==========================================================================
+   4. FOOTER CONTROLS & BUTTONS
+   ========================================================================== */
+.footer-controls {
+    box-sizing: border-box;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 16px max(14px, env(safe-area-inset-bottom));
+}
+
 .dots-container {
     flex-direction: row-reverse;
-    /* Forces the first dot to start on the left in RTL mode */
     display: flex;
     gap: 8px;
     justify-content: center;
@@ -209,27 +279,24 @@ body {
 
 .dot.active {
     background-color: #243b53;
-    /* Active dark dot */
     transform: scale(1.2);
 }
 
-/* Action button row */
 .button-group {
-    width: 100%;
     display: flex;
+    gap: clamp(8px, 3vw, 16px);
+    width: 100%;
+    max-width: 360px;
     justify-content: center;
-    gap: 12px;
 }
 
-/* Primary "המשך" / "סיום" button */
 .btn-primary {
+    flex: 2;
     background-color: #627d98;
-    /* Muted blue-grey tone */
     color: #ffffff;
-    font-size: 1.1rem;
+    font-size: 1.05rem;
     font-weight: bold;
     padding: 12px 0;
-    width: 70%;
     border: none;
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
@@ -241,183 +308,29 @@ body {
     background-color: #486581;
 }
 
-/* Secondary "חזור" button */
 .btn-secondary {
-    background-color: rgba(255, 255, 255, 0.8);
+    flex: 1;
+    background-color: rgba(255, 255, 255, 0.85);
     color: #334e68;
-    font-size: 1.1rem;
+    font-size: 1.05rem;
     font-weight: bold;
-    padding: 12px 20px;
+    padding: 12px 0;
     border: none;
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
     cursor: pointer;
 }
 
-/* Layout 1: Icon Card Container */
-.icon-card-layout {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 16px;
-  width: 100%;
-}
-
-.app-icon-badge {
-  background-color: #0066ff; /* Bright blue background matching the design */
-  width: 120px;
-  height: 120px;
-  border-radius: 16px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
-  border: 3px solid #ffffff;
-}
-
-.app-icon-badge img {
-  width: 80px;
-  height: auto;
-}
-
-/* Layout 2: Flow Steps Container */
-.flow-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 90%;
-  max-width: 360px;
-  gap: 8px;
-}
-
-.flow-box {
-  background-color: rgba(255, 255, 255, 0.92);
-  width: 100%;
-  padding: 16px 20px;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  border: 1px solid #ccd8e8;
-  text-align: right;
-}
-
-.flow-box p {
-  margin: 0;
-  font-size: 1rem;
-  font-weight: 600;
-  color: #102a43;
-}
-
-.flow-arrow {
-  font-size: 2.5rem;
-  color: #102a43;
-  margin: 2px 0;
-  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
-}
-
-html, body, #root {
-  height: 100%;
-  margin: 0;
-}
-
-/* page fills the phone; header, content and footer stack in a column */
-.carousel-container {
-  display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
-  width: 100%;
-  min-height: 100vh;
-  min-height: 100dvh;      /* accounts for mobile browser bars */
-  overflow-x: hidden;
-}
-
-/* content takes the leftover space and scrolls only if it really must */
-.content-area {
-  flex: 1 1 auto;
-  min-height: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  box-sizing: border-box;
-  width: 100%;
-  padding: clamp(8px, 2dvh, 20px) clamp(12px, 5vw, 24px);
-  overflow-y: auto;
-}
-
-.step-heading {
-  margin-bottom: clamp(8px, 2.5dvh, 20px);
-}
-
-.step-title {
-  font-size: clamp(22px, 7.5vw, 32px);
-}
-
-.step-subtitle {
-  font-size: clamp(14px, 4.5vw, 18px);
-}
-
-.page-stack {
-  width: 100%;
-  max-width: 380px;
-  margin-inline: auto;
-}
-
-.notebook-card {
-  box-sizing: border-box;
-  width: 100%;
-  margin: 0;
-  min-height: clamp(240px, 40dvh, 420px);
-}
-
-.notebook-card h3 {
-  font-size: clamp(16px, 5vw, 20px);
-}
-
-.notebook-card p {
-  font-size: clamp(13px, 3.9vw, 16px);
-}
-
-.notebook-card--with-icon .app-icon-badge {
-  width: clamp(72px, 24vw, 100px);
-  height: clamp(72px, 24vw, 100px);
-}
-
-.flow-container {
-  width: 100%;
-}
-
-.flow-box {
-  box-sizing: border-box;
-  width: 100%;
-  font-size: clamp(13px, 4vw, 16px);
-}
-
-/* footer stays reachable above the home indicator / gesture bar */
-.footer-controls {
-  box-sizing: border-box;
-  width: 100%;
-  padding: 8px clamp(12px, 5vw, 24px) max(14px, env(safe-area-inset-bottom));
-}
-
-.button-group {
-  display: flex;
-  gap: clamp(8px, 3vw, 16px);
-  width: 100%;
-  max-width: 380px;
-  margin-inline: auto;
-}
-
-.button-group > * {
-  flex: 1;
-}
-
-/* short phones (small SE-type screens, landscape) */
-@media (max-height: 640px) {
-  .notebook-card {
-    min-height: 0;
-  }
-
-  .step-title {
-    font-size: clamp(20px, 6vw, 26px);
-  }
+/* Short phone / landscape overrides */
+@media (max-height: 650px) {
+    .notebook-card {
+        min-height: 0;
+        padding-top: 22px;
+    }
+    .notebook-card p {
+        line-height: 24px;
+    }
+    .step-heading {
+        margin-bottom: 6px;
+    }
 }
