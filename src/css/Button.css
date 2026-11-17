@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 @font-face {
     font-family: 'adi';
     src: url('/src/assets/fonts/OH\ AdiLeon-Regular.otf')
@@ -14,21 +13,4 @@ button {
     border: none;
     border-radius: 10px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-=======
-@font-face {
-    font-family: 'adi';
-    src: url('/src/assets/fonts/OH\ AdiLeon-Regular.otf')
-}
-
-button {
-    width: 45vw;
-    height: 8vh;
-    background-color: #6B7EA2;
-    font-family: 'adi';
-    font-size: 2.5rem;
-    color: #FFFFFF;
-    border: none;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
->>>>>>> 84d32e05897533f269634b07f56285b320436f12
 }
