@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../css/introPage.css";
+import "../css/IntroPage.css";
 import Header from "../components/Header.jsx";
 import Button from "../components/Button.jsx";
 import appIcon from "../assets/images/app_icon.png";

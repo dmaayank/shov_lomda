@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import HomePage from "./components/homePage.jsx"; 
-import IntroPage from "./components/introPage.jsx";
+import IntroPage from "./components/IntroPage";
 import TutorialScreen from "./components/TutorialScreen.jsx"; // Imported your tutorial screen
 import "./css/App.css";
 import { SECTIONS } from "./data/sections";
