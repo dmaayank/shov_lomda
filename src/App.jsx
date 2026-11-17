@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import HomePage from "./components/homePage.jsx"; 
@@ -42,6 +43,21 @@ const App = () => {
     }
 
     return null;
+=======
+import React from "react";
+import { Routes, Route } from "react-router-dom";
+import HomePage from "./components/homePage.jsx";
+import IntroPage from "./components/introPage.jsx"; // 1. Import your IntroPage
+import "./css/App.css";
+
+const App = () => {
+  return (
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+      <Route path="/intro" element={<IntroPage />} /> {/* 2. Add the route */}
+    </Routes>
+  );
+>>>>>>> 84d32e05897533f269634b07f56285b320436f12
 };
 
 export default App;

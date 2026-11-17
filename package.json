@@ -11,7 +11,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
+<<<<<<< HEAD
     "@tabler/icons-react": "^3.52.0",
+=======
+>>>>>>> 84d32e05897533f269634b07f56285b320436f12
     "lucide-react": "^1.70.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
@@ -29,4 +32,8 @@
     "globals": "^16.5.0",
     "vite": "^7.2.4"
   }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 84d32e05897533f269634b07f56285b320436f12

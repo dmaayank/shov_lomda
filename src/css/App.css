@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 @font-face {
     font-family: 'adi';
     src: url('/src/assets/fonts/OH\ AdiLeon-Regular.otf')
@@ -17,3 +18,24 @@
     font-family: 'playpen';
     src: url('/src/assets/fonts/PlaypenSansHebrew-VariableFont_wght.ttf')
 }
+=======
+@font-face {
+    font-family: 'adi';
+    src: url('/src/assets/fonts/OH\ AdiLeon-Regular.otf')
+}
+
+@font-face {
+    font-family: 'ibm-regular';
+    src: url('/src/assets/fonts/IBMPlexSansHebrew-Regular.ttf')
+}
+
+@font-face {
+    font-family: 'ibm-bold';
+    src: url('/src/assets/fonts/IBMPlexSansHebrew-Bold.ttf')
+}
+
+@font-face {
+    font-family: 'playpen';
+    src: url('/src/assets/fonts/PlaypenSansHebrew-VariableFont_wght.ttf')
+}
+>>>>>>> 84d32e05897533f269634b07f56285b320436f12
