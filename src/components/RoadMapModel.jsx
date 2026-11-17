@@ -2,13 +2,14 @@ import React, { useState, useEffect } from "react";
 import { X } from "lucide-react";
 import "../css/roadmapModal.css";
 import paramedicsImg from "../assets/images/paramedics.png";
+import { SECTION_PAGES } from "../constants";
 
 const W = 310;
 const H = 812;
 const OFFSET_X = 18;
 const IMAGE_FACES_RIGHT = true;
 
-// scales the fixed 310x812 canvas down to fit small screens (never above 100%)
+// scales the fixed 310x812 canvas to fit small screens (never above 100%)
 const useFitScale = () => {
     const calc = () =>
         Math.min(1, (window.innerWidth - 32) / W, (window.innerHeight - 32) / H);
@@ -23,7 +24,7 @@ const useFitScale = () => {
     return scale;
 };
 
-// Ordered top to bottom (index 0 = first step)
+// Ordered top to bottom (index 0 = first section)
 const STEPS = [
     { id: "intro", label: "מבוא + הקדמה", x: 77, y: 66, dx: -14 },
     { id: "first-contact", label: "התחברות ראשונית והגדרת צוות", x: 262, y: 213 },
@@ -33,6 +34,7 @@ const STEPS = [
     { id: "casualty", label: "קליטת פצוע", x: 257, y: 716 },
 ];
 
+// footprint runs, bottom to top
 const STEP_GROUPS = [
     [[230, 780], [258, 761]],
     [[244, 685], [211, 666], [178, 647], [146, 628], [113, 609]],
@@ -54,13 +56,37 @@ const footsteps = STEP_GROUPS.flatMap((group, g) =>
             group: g,
             x: x - OFFSET_X,
             y,
-            angle: (Math.atan2(tx, -ty) * 180) / Math.PI + 180,
+            angle: (Math.atan2(tx, -ty) * 180) / Math.PI + 180, // walking down
         };
     })
 ).map((f, i, arr) => ({ ...f, order: arr.length - 1 - i })); // 0 = top footprint
 
 // footprints sorted top to bottom
 const pathOrder = [...footsteps].sort((a, b) => a.order - b.order);
+
+// footprints per section, top to bottom: [5, 5, 5, 5, 5, 2]
+const RUN_LENGTHS = [...STEP_GROUPS].reverse().map((g) => g.length);
+
+// how many footprints are white, given the pages finished across the whole course
+const countWhite = (completed, sectionPages) => {
+    let start = 0;
+    let total = 0;
+    sectionPages.forEach((pages, i) => {
+        const progress = Math.min(Math.max(completed - start, 0), pages) / pages;
+        total += Math.round(progress * (RUN_LENGTHS[i] ?? 0)); start += pages;
+    });
+    return total;
+};
+
+// which section (0-5) the given global page belongs to
+const stationForPage = (completed, sectionPages) => {
+    let end = 0;
+    for (let i = 0; i < sectionPages.length; i++) {
+        end += sectionPages[i];
+        if (completed <= end) return i;
+    }
+    return sectionPages.length - 1;
+};
 
 const Footstep = ({ x, y, angle, done }) => (
     <g
@@ -109,24 +135,22 @@ const RoadmapModal = ({
     isOpen,
     onClose,
     currentStepIndex = 0,
-    completedFootsteps = 0,
-    totalPages = 22,
+    completedFootsteps = 0,   // pages finished across the WHOLE course
+    sectionPages = SECTION_PAGES,
 }) => {
     const scale = useFitScale(); // hooks must run before any early return
 
     if (!isOpen) return null;
 
-    // pages finished -> number of footprints to whiten (whole path fills by the last page)
-    const whiteCount = Math.round((completedFootsteps / totalPages) * footsteps.length);
+    const whiteCount = countWhite(completedFootsteps, sectionPages);
+    const currentStation = stationForPage(completedFootsteps, sectionPages);
 
     // paramedics stand on the last white footprint (or the first one at the start)
-    const lead = pathOrder[Math.min(Math.max(whiteCount - 1, 0), pathOrder.length - 1)];
-    const walkingRight = lead.group % 2 === 1;
+    const lead = pathOrder[Math.min(Math.max(whiteCount - 1, 0), pathOrder.length - 1)] || pathOrder[0] || { group: 0, x: 0, y: 0 }; const walkingRight = lead.group % 2 === 1;
     const flipped = walkingRight !== IMAGE_FACES_RIGHT;
 
     return (
         <div className="rm-overlay" onClick={onClose}>
-            {/* sizing box = the scaled size, so layout and centering are correct */}
             <div
                 className="rm-fit"
                 style={{ width: W * scale, height: H * scale }}
@@ -150,7 +174,6 @@ const RoadmapModal = ({
                         ))}
                     </svg>
 
-                    {/* walking paramedics */}
                     <div
                         className="rm-walker"
                         style={{ transform: `translate(${lead.x}px, ${lead.y}px)` }}
@@ -164,7 +187,7 @@ const RoadmapModal = ({
 
                     {STEPS.map((s, i) => {
                         const state =
-                            i < currentStepIndex ? "done" : i === currentStepIndex ? "current" : "upcoming";
+                            i < currentStation ? "done" : i === currentStation ? "current" : "upcoming";
                         return (
                             <div
                                 key={s.id}

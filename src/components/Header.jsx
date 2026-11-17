@@ -7,32 +7,39 @@ const Header = ({ onMapClick }) => {
     return (
         <div className="top-banner">
             {/* Clickable section to open map modal */}
-            <div 
-                className="header-right-section" 
-                onClick={onMapClick} 
+            <div
+                className="header-right-section"
+                onClick={onMapClick}
                 style={{ cursor: "pointer" }}
             >
                 <div className="header-titles">
                     <div className="title-with-icon">
                         <div className="map-icon-wrapper">
-                            <svg 
-                                width="32" 
-                                height="32" 
-                                viewBox="0 0 24 24" 
-                                fill="none" 
-                                stroke="currentColor" 
-                                strokeWidth="2" 
-                                strokeLinecap="round" 
-                                strokeLinejoin="round"
+                            <button
+                                type="button"
+                                className="map-button"
+                                aria-label="פתח מפה"
+                                title="פתח מפה"
                             >
-                                <polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21" />
-                                <line x1="9" y1="3" x2="9" y2="18" />
-                                <line x1="15" y1="6" x2="15" y2="21" />
-                            </svg>
+                                <svg
+                                    viewBox="0 0 48 48"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    strokeWidth="2.8"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    aria-hidden="true"
+                                >
+                                    <path d="M5 12 L17 7 L31 12 L43 7 V36 L31 41 L17 36 L5 41 Z" />
+                                    <path d="M17 7 V36 M31 12 V41" />
+                                    <path d="M24 13 C19 13 17 17 17 21 C17 26 24 33 24 33 C24 33 31 26 31 21 C31 17 29 13 24 13Z" />
+                                    <circle cx="24" cy="21" r="2.5" fill="currentColor" stroke="none" />
+                                </svg>
+                            </button>
                         </div>
                         <span className="system-title">מערכת שו”ב פצועים</span>
                     </div>
-                    
+
                     <div className="subtitle-container">
                         {/* <svg className="header-footprint-icon" width="18" height="18" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
                             <path d="M 12 30 A 18 18 0 0 1 30 48 L 30 30 Z" fill="#102a43" />

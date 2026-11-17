@@ -13,7 +13,7 @@
 .header-logos {
     display: flex;
     gap: 10px;
-    align-items: center;
+    align-items: left;
 }
 
 .top-logo {
@@ -96,4 +96,42 @@
   font-weight: 600;
   color: #102a43;
   margin-top: 2px;
+}
+
+.map-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 54px;
+    height: 54px;
+    padding: 0;
+
+    background: transparent;
+    color: #1e3a5f;
+    border: none;
+    border-radius: 12px;
+
+    cursor: pointer;
+
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.map-button:hover {
+    color: #426b91;
+    transform: scale(1.15);
+}
+
+.map-button:active {
+    transform: scale(0.92);
+}
+
+.map-button svg {
+    width: 42px;
+    height: 42px;
+}
+
+.map-button:focus-visible {
+    outline: 2px solid #1e3a5f;
+    outline-offset: 3px;
 }

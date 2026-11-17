@@ -1,0 +1,827 @@
+.tutorial-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  padding: 16px;
+  direction: rtl;
+  box-sizing: border-box;
+}
+
+/* Top Banner Layout */
+.top-banner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 340px;
+  margin-bottom: 12px;
+}
+
+.titles {
+  text-align: center;
+  flex: 1;
+  padding: 0 10px;
+}
+
+.titles h1 {
+  font-size: 1.2rem;
+  margin: 0;
+  color: #1e242b;
+}
+
+.titles p {
+  font-size: 0.85rem;
+  margin: 4px 0 0 0;
+  color: #555;
+}
+
+.nav-arrow {
+  background: #364968;
+  color: white;
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  font-size: 1.1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.nav-arrow:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.counter {
+  font-size: 0.85rem;
+  font-weight: bold;
+  color: #333;
+  min-width: 35px;
+  text-align: left;
+}
+
+/* Phone Mockup Frame */
+.phone-frame {
+  position: relative;
+  width: 100%;
+  max-width: 360px;
+  /* Maximum width on desktop */
+  aspect-ratio: 340 / 700;
+  /* Automatically maintains the phone shape */
+  height: auto;
+  /* Replaces the fixed height */
+  border-radius: 28px;
+  border: 3px solid #1e242b;
+  overflow: hidden;
+  box-shadow: 0 18px 36px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+  background: #fff;
+}
+
+.screen-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Tooltip card */
+.blue-tooltip-card {
+  position: absolute;
+  background-color: #364968;
+  color: #ffffff;
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  max-width: 180px;
+  text-align: center;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+  z-index: 20;
+  transition: top 0.35s ease, left 0.35s ease;
+}
+
+/* Click Hotspot */
+.click-hotspot {
+  position: absolute;
+  width: 44px;
+  height: 44px;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 15;
+}
+
+.pulse-ring {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: rgba(54, 73, 104, 0.45);
+  animation: pulseTap 1.4s infinite ease-out;
+}
+
+.tap-hand {
+  font-size: 1.5rem;
+  position: relative;
+  z-index: 2;
+  animation: tapBounce 1.4s infinite ease-in-out;
+}
+
+@keyframes pulseTap {
+  0% {
+    transform: scale(0.6);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(1.8);
+    opacity: 0;
+  }
+}
+
+@keyframes tapBounce {
+
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+
+  50% {
+    transform: translateY(3px) scale(0.9);
+  }
+}
+
+
+/* Wrapper: fit the screen, scroll only as a last resort */
+.tutorial-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100dvh;
+  padding: 12px 16px max(16px, env(safe-area-inset-bottom));
+  direction: rtl;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+/* Phone: shrinks so the buttons always have room below it */
+.phone-frame {
+  position: relative;
+  aspect-ratio: 340 / 700;
+  height: auto;
+  /* 240px ≈ banner + buttons + padding. Adjust if your banner is taller */
+  width: min(100%, 360px, calc((100dvh - 240px) * 340 / 700));
+  border-radius: 28px;
+  border: 3px solid #1e242b;
+  overflow: hidden;
+  box-shadow: 0 18px 36px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+  background: #fff;
+  flex-shrink: 0;
+}
+
+/* Buttons: normal flow, directly under the phone */
+.tutorial-wrapper .button-group {
+  position: static;
+  display: flex;
+  flex-direction: row;
+  /* with direction: rtl, first child sits on the right */
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  max-width: 360px;
+  margin: 14px auto 0;
+  pointer-events: auto;
+}
+
+.tutorial-wrapper .btn-primary,
+.tutorial-wrapper .btn-secondary {
+  flex: 1;
+  min-height: 48px;
+  padding: 10px 16px;
+  font-size: clamp(0.95rem, 4vw, 1.1rem);
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  text-align: center;
+}
+
+.tutorial-wrapper .btn-primary {
+  background-color: #627d98;
+  color: #fff;
+}
+
+.tutorial-wrapper .btn-secondary {
+  background-color: rgba(255, 255, 255, 0.85);
+  color: #334e68;
+}
+
+.phone-stage {
+  flex: 1;
+  /* take all space between banner and buttons */
+  width: 100%;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  /* vertical centering */
+  justify-content: center;
+  /* horizontal centering */
+}
+
+/* Keep the banner aligned with the phone */
+.top-banner {
+  max-width: 360px;
+  margin: 0 auto 12px;
+}
+
+.tutorial-wrapper .button-group.hidden {
+  display: none !important;
+}
+
+
+/* Dark backdrop that covers the inside of the phone frame */
+.phone-popup-overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.65);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 20;
+  padding: 20px;
+  animation: fadeIn 0.2s ease-out;
+}
+
+/* The rounded popup card itself */
+.phone-popup-card {
+  background-color: #3b4d6b;
+  /* matches the blue tone in your screenshot */
+  border: 1px solid #9EAFCE;
+  border-radius: 16px;
+  padding: 24px 20px;
+  width: 100%;
+  max-width: 280px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+}
+
+.popup-text {
+  color: #ffffff;
+  font-size: clamp(14px, 4vw, 16px);
+  font-weight: 600;
+  line-height: 1.4;
+  margin: 0 0 20px 0;
+  white-space: pre-line;
+}
+
+.popup-btn {
+  background-color: #7b92ab;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 24px;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transition: background 0.2s;
+}
+
+.popup-btn:hover {
+  background-color: #627d98;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.top-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 360px;
+  margin: 0 auto 12px;
+  position: relative;
+  padding: 0 4px;
+}
+
+.top-banner .titles {
+  flex: 1;
+  text-align: center;
+}
+
+/* Styling for the back arrow button */
+.back-arrow-btn {
+  background: none;
+  border: none;
+  font-size: 1.8rem;
+  color: #243b53;
+  cursor: pointer;
+  padding: 4px 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease;
+}
+
+.back-arrow-btn:hover {
+  transform: scale(1.1);
+}
+
+@keyframes tooltipFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(3px);
+    /* Optional: gentle slide-up effect */
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.blue-tooltip-card {
+  position: absolute;
+  /* your existing tooltip positioning styles */
+  animation: tooltipFadeIn 0.3s ease-out forwards;
+}
+
+
+.flow-stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  max-width: 420px;
+  margin: 0 auto;
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+.flow-step {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  padding: 16px;
+  border-radius: 14px;
+  /* background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.2); */
+  box-sizing: border-box;
+}
+
+.flow-step-number {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  font-size: 1.5rem;
+  align-items: center;
+  justify-content: center;
+  color: #37496D;
+  border: solid 2px #122851;
+  font-weight: 700;
+}
+
+.step-1 {
+  background: #F2F6FF;
+
+}
+
+.step-2 {
+  background: #D7DEEE;
+
+}
+
+.step-3 {
+  background: #A8B2C9;
+
+}
+
+
+.flow-step-title {
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.flow-step-text {
+  opacity: 0.85;
+  margin-top: 4px;
+}
+
+.flow-arrow {
+  font-size: 1.6rem;
+  opacity: 0.6;
+}
+
+.web-stage {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+.web-image {
+  width: 100%;
+  max-width: 900px;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.flow-stage {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;   /* ממורכז אנכית בין הכותרת לכפתורים */
+    gap: 8px;
+    width: 100%;
+    max-width: 420px;
+    margin: 0 auto;
+    padding: 16px;
+    box-sizing: border-box;
+}
+
+.web-stage {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 16px;
+    box-sizing: border-box;
+}
+
+
+.web-image {
+    display: block;
+    width: 100%;
+    border-radius: 4px;
+}
+
+.enlarge-btn {
+    position: absolute;
+    bottom: 25px;
+    left: 14px;
+    width: 34px;
+    height: 34px;
+    border: none;
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.enlarged-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    background: rgba(0, 0, 0, 0.92);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+.enlarged-close {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    z-index: 1;
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
+    font-size: 1.3rem;
+    cursor: pointer;
+}
+
+/* The image is rotated 90 degrees on portrait screens (phones),
+   so it fills the screen as if the phone were turned sideways. */
+.enlarged-rotator img {
+    display: block;
+    max-width: 95vw;
+    max-height: 95vh;
+    border-radius: 6px;
+}
+
+@media (orientation: portrait) {
+    .enlarged-rotator {
+        width: 100vh;
+        height: 100vw;
+        transform: rotate(90deg);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .enlarged-rotator img {
+        max-width: 95%;
+        max-height: 95%;
+    }
+}
+
+.monitor {
+    width: 100%;
+    max-width: 950px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.monitor-screen {
+    position: relative;
+    width: 100%;
+    box-sizing: border-box;
+    background: #1b1b1f;
+    padding: 10px 10px 22px;      /* thicker chin at the bottom, like a real monitor */
+    border-radius: 10px;
+    border: 2px solid #3a3a40;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.monitor-screen::after {          /* small power light on the chin */
+    content: "";
+    position: absolute;
+    bottom: 8px;
+    left: 50%;
+    width: 10px;
+    height: 6px;
+    margin-left: -3px;
+    border-radius: 50%;
+    background: #bde6fd;
+}
+.monitor-neck {
+    width: 14%;
+    height: 28px;
+    background: linear-gradient(90deg, #8d8d95, #c9c9d0 50%, #8d8d95);
+}
+.monitor-stand {
+    width: 34%;
+    height: 10px;
+    background: linear-gradient(#c9c9d0, #8d8d95);
+    border-radius: 6px 6px 12px 12px;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
+}
+
+@media (orientation: portrait) and (pointer: coarse) {
+    .enlarged-rotator {
+        width: 100vh;
+        height: 100vw;
+        width: 100dvh;     /* overrides on browsers that support it */
+        height: 100dvw;
+        transform: rotate(90deg);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .enlarged-rotator img {
+        max-width: 95%;
+        max-height: 95%;
+    }
+}
+
+.flow-stage,
+.web-stage {
+    padding-bottom: 110px;
+}
+
+.enlarged-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    background: #000;              /* solid, no see-through */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    touch-action: none;
+}
+
+/* Landscape / desktop: the image fills the screen as is */
+.enlarged-rotator {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.enlarged-rotator img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;           /* scales up as far as it can, keeps proportions */
+    transform-origin: center;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+/* Upright phone: rotate the box so its long side runs along the screen's long side */
+@media (orientation: portrait) and (pointer: coarse) {
+    .enlarged-rotator {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 100vh;
+        height: 100vw;
+        width: 100dvh;
+        height: 100dvw;
+        transform: translate(-50%, -50%) rotate(90deg);
+    }
+}
+
+@keyframes tooltipFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.blue-tooltip-card {
+  position: absolute;
+  background-color: #2c3e50;
+  color: #ffffff;
+  padding: 12px 16px;
+  border-radius: 12px;
+  font-size: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;      /* children fill the card width, never exceed it */
+  gap: 8px;
+  box-sizing: border-box;
+  width: max-content;        /* card fits its widest line */
+  max-width: calc(100vw - 16px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  z-index: 100;
+  white-space: nowrap;
+  overflow: hidden;          /* safety net: nothing can render outside the rounded card */
+  animation: tooltipFadeIn 0.3s ease-out forwards;
+}
+
+.tooltip-text {
+  font-weight: 500;
+  text-align: right;
+}
+
+.tooltip-line-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  gap: 16px;
+  margin-top: 2px;
+}
+
+.tooltip-center-content {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.tooltip-subtext {
+  font-weight: 400;
+  color: #ffffff;
+  font-size: 14px;
+}
+
+.tooltip-icon {
+  font-size: 16px;
+}
+
+.tooltip-arrow {
+  flex: 0 0 auto;            /* arrows keep their size and don't get pushed out */
+  font-size: 18px;
+  line-height: 1;
+  font-weight: bold;
+  color: #ffffff;
+  cursor: pointer;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.tooltip-arrow:hover {
+  opacity: 0.7;
+  transform: scale(1.1);
+}
+
+.blue-tooltip-card {
+  position: absolute;
+  background-color: #2c3e50;
+  color: #ffffff;
+  padding: 12px 16px;
+  border-radius: 12px;
+  font-size: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 8px;
+  text-align:center;
+  box-sizing: border-box;
+  width: max-content;
+  max-width: 50%;               /* never wider than the phone area */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  z-index: 100;
+  direction: rtl;
+  animation: tooltipFadeIn 0.3s ease-out forwards;
+  /* removed: white-space: nowrap; overflow: hidden */
+}
+
+.tooltip-text {
+  font-weight: 500;
+  text-align: center;
+  white-space: normal;          /* long text wraps */
+  overflow-wrap: break-word;
+}
+
+/* the arrows/icon row stays on one line */
+.tooltip-line-between {
+  white-space: nowrap;
+}
+
+.tutorial-banner-card {
+  position: absolute;
+  background-color: #2c3e50; /* צבע כהה תואם לממשק שלך */
+  color: #ffffff;
+  padding: 16px 20px;
+  border-radius: 14px;
+  width: 85%;                /* תופס רוחב יפה בתוך המסך מבלי להיצמד לקצוות */
+  max-width: 280px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  z-index: 50;               /* מעל צילום המסך אבל בתוך מסגרת הטלפון */
+  text-align: center;
+  animation: bannerFadeIn 0.3s ease-out forwards;
+}
+
+@keyframes bannerFadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+.banner-text {
+  font-size: 13px;
+  line-height: 1.5;
+  font-weight: 400;
+  margin: 0;
+  direction: rtl;
+
+}
+
+.banner-action-btn {
+  background-color: #5c768d;   /* גוון אפרפר-תכלת כפתור */
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 6px 24px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.banner-action-btn:hover {
+  background-color: #6c88a3;
+  transform: scale(1.02);
+}

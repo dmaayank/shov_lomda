@@ -5,12 +5,11 @@ import Button from "../components/Button.jsx";
 import appIcon from "../assets/images/app_icon.png";
 import RoadmapModal from "../components/RoadMapModel.jsx";
 
-const IntroPage = ({ label, onClick, disabled = false }) => {
+const IntroPage = ({ label, onClick, disabled = false, pageOffset = 0 }) => {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [isMapOpen, setIsMapOpen] = useState(false);
-    const [completedPages, setCompletedPages] = useState(0);
     const [flip, setFlip] = useState(null); // { from: stepIndex, dir: "next" | "prev", id }
-    const TOTAL_APP_PAGES = 22; // pages across the whole flow
+    const TOTAL_APP_PAGES = 25; // pages across the whole flow
 
     const steps = [
         {
@@ -33,7 +32,7 @@ const IntroPage = ({ label, onClick, disabled = false }) => {
             title: "אולר רשתי",
             subtitle: "",
             cardTitle: "מהו אולר רשתי?",
-            content: `מכשיר סמסונג המריץ מערכת אנדרויד. טלפון סלולרי ואג”מי הנמצא אצל כלל בעלי תפקידים ומשמש את צוותי הרפואה במערכת שו”ב פצועים. המכשיר מאפשר הנגשת יישומית לפעילות בגזרות שונות ובמתארי הפעולות השונים, בשגרה, באימונים, ובבט”ש ובתמרון.`,
+            content: `מכשיר סמסונג המריץ מערכת אנדרואיד. טלפון סלולרי ואג”מי הנמצא אצל כלל בעלי תפקידים ומשמש את צוותי הרפואה במערכת שו”ב פצועים. המכשיר מאפשר הנגשת יישומית לפעילות בגזרות שונות ובמתארי הפעולות השונים, בשגרה, באימונים, ובבט”ש ובתמרון.`,
             type: "notebook",
             roadmapStation: 0,
         },
@@ -46,23 +45,13 @@ const IntroPage = ({ label, onClick, disabled = false }) => {
             iconImage: appIcon,
             roadmapStation: 0,
         },
-        {
-            title: 'מערכת שו"ב פצועים',
-            subtitle: "התחברות ראשונית",
-            type: "flow-steps",
-            stepsList: [
-                "1. פותחים את האולר ומקישים קוד פתיחה",
-                "2. לוחצים על האפליקציה Capsule VPN ואז על Connect",
-                '3. לוחצים על האייקון "שו"ב רפואה"',
-            ],
-            roadmapStation: 1,
-        },
     ];
 
     const totalSteps = steps.length;
     const isFirstStep = currentIndex === 0;
     const isLastStep = currentIndex === totalSteps - 1;
     const currentStep = steps[currentIndex];
+    const completedPages = pageOffset + currentIndex + 1;
 
     // every move (buttons and dots) goes through here so the page flips
     const goTo = (newIndex) => {
@@ -73,12 +62,10 @@ const IntroPage = ({ label, onClick, disabled = false }) => {
             id: Date.now(),
         });
         setCurrentIndex(newIndex);
-        setCompletedPages(newIndex);
     };
 
     const handleNext = () => {
         if (isLastStep) {
-            setCompletedPages(totalSteps);
             onClick?.();
         } else {
             goTo(currentIndex + 1);
@@ -135,7 +122,6 @@ const IntroPage = ({ label, onClick, disabled = false }) => {
                 onClose={() => setIsMapOpen(false)}
                 currentStepIndex={currentStep.roadmapStation}
                 completedFootsteps={completedPages}
-                totalPages={TOTAL_APP_PAGES}
             />
 
             <main className="content-area">
